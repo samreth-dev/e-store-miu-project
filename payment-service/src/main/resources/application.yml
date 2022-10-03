@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: payment-service
+  cloud:
+    loadbalancer:
+      ribbon:
+        enable: false
+
+server:
+  port: 8085
+  error:
+    include-message: always
+
+account-service:
+  ribbon:
+    listOfServers: ${ACCOUNT_SERVICE:http://localhost:8081}
+order-service:
+  ribbon:
+    listOfServers: ${ORDER_SERVICE:http://localhost:8083}
+credit-service:
+  ribbon:
+    listOfServers: ${CREDIT_SERVICE:http://localhost:8086}
+bank-service:
+  ribbon:
+    listOfServers: ${BANK_SERVICE:http://localhost:8087}
+paypal-service:
+  ribbon:
+    listOfServers: ${PAYPAL_SERVICE:http://localhost:8088}

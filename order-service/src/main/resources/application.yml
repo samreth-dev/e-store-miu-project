@@ -1,0 +1,43 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/account
+    username: postgres
+    password: postgres
+
+  properties:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      format_sql: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    show-sql: true
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      mode: always
+
+  application:
+    name: order-service
+
+  cloud:
+    loadbalancer:
+      ribbon:
+        enable: false
+
+server:
+  port: 8083
+  error:
+    include-message: always
+product-service:
+  ribbon:
+    listOfServers: ${PRODUCT_SERVICE:http://localhost:8084}
+payment-service:
+  ribbon:
+    listOfServers: ${PAYMENT_SERVICE:http://localhost:8085}
+#custom:
+#  product-service: ${PRODUCT_SERVICE:http://localhost:8084}
+#  payment-service: ${PAYMENT_SERVICE:http://localhost:8085}
